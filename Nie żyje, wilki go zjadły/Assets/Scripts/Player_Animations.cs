@@ -22,12 +22,12 @@ public class Player_Animations : MonoBehaviour
         
     }
 
-    public void UpdateSprite(char compassDirection) {
-        switch (compassDirection) {
-            case 'N': spriteRenderer.sprite = head_up; break;
-            case 'S': spriteRenderer.sprite = head_down; break;
-            case 'E': spriteRenderer.sprite = head_right; break;
-            case 'W': spriteRenderer.sprite = head_left; break;
+    public void UpdateSprite(Direction facingDirection) {
+        switch (facingDirection) {
+            case Direction.Up: spriteRenderer.sprite = head_up; break;
+            case Direction.Right: spriteRenderer.sprite = head_right; break;
+            case Direction.Down: spriteRenderer.sprite = head_down; break;
+            case Direction.Left: spriteRenderer.sprite = head_left; break;
         }
     }
 }

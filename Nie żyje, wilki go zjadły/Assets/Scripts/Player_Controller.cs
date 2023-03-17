@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
+public enum Direction { Up, Right, Down, Left };
 
 [RequireComponent(typeof(Player_Animations))]
 [RequireComponent(typeof(Player_Input))]
-[RequireComponent(typeof(Player_Interact))]
+[RequireComponent(typeof(Player_Interaction))]
 [RequireComponent(typeof(Player_Movement))]
+[RequireComponent(typeof(Player_UI))]
 
 public class Player_Controller : MonoBehaviour
 {
@@ -16,16 +18,18 @@ public class Player_Controller : MonoBehaviour
 
     Player_Animations animations;
     Player_Input input;
-    Player_Interact interact;
+    Player_Interaction interact;
     Player_Movement movement;
+    Player_UI ui;
 
-    char compassDirection;
+    Direction facingDirection;
 
     private void Start() {
         animations = GetComponent<Player_Animations>();
         input = GetComponent<Player_Input>();
-        interact = GetComponent<Player_Interact>();
+        interact = GetComponent<Player_Interaction>();
         movement = GetComponent<Player_Movement>();
+        ui = GetComponent<Player_UI>();
     }
 
     void Update() {
@@ -37,20 +41,23 @@ public class Player_Controller : MonoBehaviour
         float speed = input.Run ? speed_run : input.Sneak ? speed_sneak : speed_walk;
 
         if (direction_x != 0 || direction_y != 0) {
-            if (direction_y == 1)       compassDirection = 'N';
-            else if (direction_y == -1) compassDirection = 'S';
-            else if (direction_x == 1)  compassDirection = 'E';
-            else if (direction_x == -1) compassDirection = 'W';
+            if (direction_y == 1)       facingDirection = Direction.Up;
+            else if (direction_y == -1) facingDirection = Direction.Down;
+            else if (direction_x == 1)  facingDirection = Direction.Right;
+            else if (direction_x == -1) facingDirection = Direction.Left;
 
-            animations.UpdateSprite(compassDirection);
+            animations.UpdateSprite(facingDirection);
         }
 
         Vector3 velocity = new Vector3(direction_x, direction_y, 0) * speed;
 
-        movement.Move(velocity);
+        if (velocity.x != 0 || velocity.y != 0) {
+            movement.Move(velocity);
+        }
 
         if (input.Interact) {
-            interact.CheckForInteractable(compassDirection);
+            interact.Interact(facingDirection);
+            ui.UpdateUI(interact.LeftArm, interact.RightArm, interact.LeftLeg, interact.RightLeg, interact.Torso);
         }
     }
 }
