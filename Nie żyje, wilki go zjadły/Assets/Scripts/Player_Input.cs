@@ -9,6 +9,7 @@ public class Player_Input : MonoBehaviour {
     private bool sneak;
 
     private bool interact;
+    private bool skip;
 
     public bool Up { get { return up; } }
     public bool Down { get { return down; } }
@@ -19,6 +20,7 @@ public class Player_Input : MonoBehaviour {
     public bool Sneak { get { return sneak; } }
 
     public bool Interact { get { return interact; } }
+    public bool Skip { get { return skip; } }
 
     public void Check_Input() {
         up = Input.GetKey(KeyCode.UpArrow);
@@ -30,5 +32,6 @@ public class Player_Input : MonoBehaviour {
         sneak = Input.GetKey(KeyCode.LeftControl);
 
         interact = Input.GetKeyDown(KeyCode.E);
+        skip = Input.GetKeyDown(KeyCode.X);
     }
 }

@@ -5,15 +5,24 @@ using TMPro;
 
 public class Player_UI : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI textMesh;
+    [SerializeField] TextMeshProUGUI info;
+    [SerializeField] TextMeshProUGUI dialogBox;
 
-    public void UpdateUI(bool armL, bool armR, bool legL, bool legR, bool torso)
+    public void UpdateUIdialogBox(string text) {
+        dialogBox.text = text;
+    }
+
+    public void ClearDialogBox() {
+        dialogBox.text = "";
+    }
+
+    public void UpdateUIinfo(bool armL, bool armR, bool legL, bool legR, bool torso)
     {
-        textMesh.text = "";
-        textMesh.text += "Left arm: " + (armL ? "X" : "-");
-        textMesh.text += "\nRight arm: " + (armR ? "X" : "-");
-        textMesh.text += "\nLeft leg: " + (legL ? "X" : "-");
-        textMesh.text += "\nRight leg: " + (legR ? "X" : "-");
-        textMesh.text += "\nTorso: " + (torso ? "X" : "-");
+        info.text = "";
+        info.text += "Left arm: " + (armL ? "X" : "-");
+        info.text += "\nRight arm: " + (armR ? "X" : "-");
+        info.text += "\nLeft leg: " + (legL ? "X" : "-");
+        info.text += "\nRight leg: " + (legR ? "X" : "-");
+        info.text += "\nTorso: " + (torso ? "X" : "-");
     }
 }

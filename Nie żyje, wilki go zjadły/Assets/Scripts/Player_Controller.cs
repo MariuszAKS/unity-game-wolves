@@ -57,7 +57,10 @@ public class Player_Controller : MonoBehaviour
 
         if (input.Interact) {
             interact.Interact(facingDirection);
-            ui.UpdateUI(interact.LeftArm, interact.RightArm, interact.LeftLeg, interact.RightLeg, interact.Torso);
+        }
+
+        if (input.Skip) {
+            ui.ClearDialogBox();
         }
     }
 }
