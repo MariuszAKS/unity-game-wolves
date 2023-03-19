@@ -60,7 +60,7 @@ public class Player_Controller : MonoBehaviour
         }
 
         if (input.Skip) {
-            ui.ClearDialogBox();
+            ui.CloseDialogBox();
         }
     }
 }
