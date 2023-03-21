@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Interaction : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Player_Interaction : MonoBehaviour
 
     int layer_interactText;
     int layer_interactAction;
+    int layer_interactionPassage;
     int layer_interactCollect;
 
     BoxCollider2D boxCollider2D;
@@ -31,6 +33,7 @@ public class Player_Interaction : MonoBehaviour
 
         layer_interactText = LayerMask.NameToLayer("Interact Text");
         layer_interactAction = LayerMask.NameToLayer("Interact Action");
+        layer_interactionPassage = LayerMask.NameToLayer("Interact Passage");
         layer_interactCollect = LayerMask.NameToLayer("Interact Collect");
 
         boxCollider2D = GetComponent<BoxCollider2D>();
@@ -128,6 +131,17 @@ public class Player_Interaction : MonoBehaviour
         }
         
         if (layer == layer_interactAction) {
+            return;
+        }
+
+        if (layer == layer_interactionPassage) {
+            Debug.Log("Passage");
+
+            if (hitColliderName == "InteractPassage_MilitaryBuilding") {
+                SceneManager.LoadScene("MilitaryBuilding");
+                return;
+            }
+
             return;
         }
 
