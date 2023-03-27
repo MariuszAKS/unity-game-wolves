@@ -45,15 +45,7 @@ public class Player_Movement : MonoBehaviour
         }
 
         if (passage_hit) {
-            if (passage_name == "Military_Building") {
-                SceneManager.LoadScene(2);
-                return;
-            }
-
-            if (passage_name == "Outside") {
-                SceneManager.LoadScene(1);
-                return;
-            }
+            MoveThroughPassage();
         }
     }
 
@@ -118,6 +110,30 @@ public class Player_Movement : MonoBehaviour
                 passage_hit = true;
                 passage_name = hit_passage.collider.name;
             }
+        }
+    }
+
+    void MoveThroughPassage() {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (sceneIndex == 1) { // Outside
+            if (passage_name == "Military_Building") {
+                SceneManager.LoadScene(2);
+            }
+            return;
+        }
+
+        if (sceneIndex == 2) { // Military Building Inside
+            if (passage_name == "Outside") {
+                SceneManager.LoadScene(1);
+            }
+            else if (passage_name == "Up") {
+                transform.position += new Vector3(2.5f, 34.8f, 0);
+            }
+            else if (passage_name == "Down") {
+                transform.position += new Vector3(-2.5f, -35.2f, 0);
+            }
+            return;
         }
     }
 }
