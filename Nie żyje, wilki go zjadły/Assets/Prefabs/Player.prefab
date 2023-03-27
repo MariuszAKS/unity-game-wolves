@@ -627,6 +627,9 @@ MonoBehaviour:
   layerMask_impassable:
     serializedVersion: 2
     m_Bits: 256
+  layerMask_passage:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &6474275499989699224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,9 +658,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833ce3b4c237874da11f344355ea177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask_collectibles:
+  layerMask_interact:
     serializedVersion: 2
-    m_Bits: 30720
+    m_Bits: 14336
 --- !u!114 &6474275499989699225
 MonoBehaviour:
   m_ObjectHideFlags: 0

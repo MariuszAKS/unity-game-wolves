@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: iron_fence_0
+  m_Name: watch_tower_16
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -1714447140, guid: 8f2ccf6351c28194aa5455c214c91ce9, type: 3}
+  m_Sprite: {fileID: 1534406576, guid: 590690d2a333e5245bbc5608f7c4be3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

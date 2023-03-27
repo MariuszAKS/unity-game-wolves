@@ -35,25 +35,23 @@ public class Player_Controller : MonoBehaviour
     void Update() {
         input.Check_Input();
 
-        int direction_x = input.Left ? -1 : input.Right ? 1 : 0;
-        int direction_y = input.Down ? -1 : input.Up ? 1 : 0;
+        Vector2 direction = new Vector2(
+            input.Left ? -1 : input.Right ? 1 : 0,
+            input.Down ? -1 : input.Up ? 1 : 0
+        );
 
         float speed = input.Run ? speed_run : input.Sneak ? speed_sneak : speed_walk;
 
-        if (direction_x != 0 || direction_y != 0) {
-            if (direction_y == 1)       facingDirection = Direction.Up;
-            else if (direction_y == -1) facingDirection = Direction.Down;
-            else if (direction_x == 1)  facingDirection = Direction.Right;
-            else if (direction_x == -1) facingDirection = Direction.Left;
+        if (direction.x != 0 || direction.y != 0) {
+            if (direction.y == 1)       facingDirection = Direction.Up;
+            else if (direction.y == -1) facingDirection = Direction.Down;
+            else if (direction.x == 1)  facingDirection = Direction.Right;
+            else if (direction.x == -1) facingDirection = Direction.Left;
 
             animations.UpdateSprite(facingDirection);
         }
 
-        Vector3 velocity = new Vector3(direction_x, direction_y, 0) * speed;
-
-        if (velocity.x != 0 || velocity.y != 0) {
-            movement.Move(velocity);
-        }
+        movement.Move(direction, speed);
 
         if (input.Interact) {
             interact.Interact(facingDirection);

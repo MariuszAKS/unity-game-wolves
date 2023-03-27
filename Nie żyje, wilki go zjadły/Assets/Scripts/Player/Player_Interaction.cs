@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player_Interaction : MonoBehaviour
 {
-    [SerializeField] LayerMask layerMask_collectibles;
+    [SerializeField] LayerMask layerMask_interact;
 
     Player_UI ui;
 
     int layer_interactText;
     int layer_interactAction;
-    int layer_interactionPassage;
     int layer_interactCollect;
 
     BoxCollider2D boxCollider2D;
@@ -22,8 +20,6 @@ public class Player_Interaction : MonoBehaviour
     float length, space_between_rays;
     const byte rays_per_side = 5;
 
-    RaycastHit2D hit;
-
     bool collected_leftArm, collected_rightArm;
     bool collected_leftLeg, collected_rightLeg;
     bool collected_torso;
@@ -33,7 +29,6 @@ public class Player_Interaction : MonoBehaviour
 
         layer_interactText = LayerMask.NameToLayer("Interact Text");
         layer_interactAction = LayerMask.NameToLayer("Interact Action");
-        layer_interactionPassage = LayerMask.NameToLayer("Interact Passage");
         layer_interactCollect = LayerMask.NameToLayer("Interact Collect");
 
         boxCollider2D = GetComponent<BoxCollider2D>();
@@ -49,18 +44,16 @@ public class Player_Interaction : MonoBehaviour
         GetRaycastParameters(facingDirection);
 
         for (int ray = 0; ray < rays_per_side; ray++) {
-            hit = Physics2D.Raycast(origin, direction, length, layerMask_collectibles);
+            RaycastHit2D hit = Physics2D.Raycast(origin, direction, length, layerMask_interact);
             Debug.DrawRay(origin, direction * length, Color.blue);
 
             origin += next_ray_direction * space_between_rays;
 
             if (hit) {
-                HandleInteraction();
+                HandleInteraction(hit);
                 break;
             }
         }
-
-
     }
 
     void GetBounds() {
@@ -113,7 +106,7 @@ public class Player_Interaction : MonoBehaviour
         }
     }
 
-    void HandleInteraction() {
+    void HandleInteraction(RaycastHit2D hit) {
         string hitColliderName = hit.collider.name;
         int layer = hit.collider.gameObject.layer;
 
@@ -131,17 +124,6 @@ public class Player_Interaction : MonoBehaviour
         }
         
         if (layer == layer_interactAction) {
-            return;
-        }
-
-        if (layer == layer_interactionPassage) {
-            Debug.Log("Passage");
-
-            if (hitColliderName == "InteractPassage_MilitaryBuilding") {
-                SceneManager.LoadScene("MilitaryBuilding");
-                return;
-            }
-
             return;
         }
 

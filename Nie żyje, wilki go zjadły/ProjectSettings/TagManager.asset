@@ -15,12 +15,12 @@ TagManager:
   - 
   - Ground
   - Impassable
-  - 
+  - Passage
   - 
   - Interact Text
   - Interact Action
-  - Interact Passage
   - Interact Collect
+  - 
   - 
   - 
   - 
